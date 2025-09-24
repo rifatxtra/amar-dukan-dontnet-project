@@ -150,3 +150,4 @@ D:\web\Restaurant Order Management System\server\obj\Debug\net8.0\ref\server.dll
 D:\web\Restaurant Order Management System\server\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\web\Restaurant Order Management System\server\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
 D:\web\Restaurant Order Management System\server\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\web\Restaurant Order Management System\server\obj\Debug\net8.0\server.sourcelink.json

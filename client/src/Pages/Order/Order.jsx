@@ -10,6 +10,8 @@ export default function Order() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [optionSelections, setOptionSelections] = useState({});
   const [cart, setCart] = useState([]);
+  const [showPopUp, setShowPopUp] = useState(true);
+  const [table, setTable] = useState("");
 
   const baseURL = "http://localhost:5214";
 
@@ -170,6 +172,7 @@ export default function Order() {
       UserId: 1,
       Total: total,
       Status: "Processing",
+      Table: table,
       Items: cart.map((item) => ({
         ProductName: item.name,
         categoryId: item.categoryId,
@@ -179,12 +182,12 @@ export default function Order() {
     };
 
     try {
-      console.log(order)
+      console.log(order);
       const res = await api.post("/Order", order);
-      if(res.status === 200) {
+      if (res.status === 200) {
         alert("Order placed successfully!");
         setCart([]);
-        setSelectedItem(null)
+        setSelectedItem(null);
       }
       //console.log("Order created", res);
     } catch (err) {
@@ -194,6 +197,27 @@ export default function Order() {
 
   return (
     <div className="w-[100vw] relative p-4">
+      {/* popup for table no */}
+      {showPopUp && (
+        <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-md w-[90%] md:w-[50%] max-h-[70vh] overflow-auto flex flex-col gap-4 items-center justify-center">
+            <label htmlFor="">Please Enter Table no.</label>
+            <input
+              className="outline-none border border-black rounded-md p-2"
+              type="number"
+              value={table}
+              onChange={(e) => setTable(e.target.value)}
+            />
+            <button
+              onClick={() => setShowPopUp(false)}
+              type="button"
+              className="w-max bg-black text-white rounded-md p-2"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      )}
       {/* Option Modal */}
       {showOption && (
         <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-50">

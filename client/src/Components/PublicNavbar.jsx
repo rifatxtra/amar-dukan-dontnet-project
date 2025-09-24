@@ -64,13 +64,13 @@ export default function PublicNavbar() {
 
             {/* Mobile Menu - Slide from Left */}
             <div
-                className={`fixed top-30 left-0 justify-start items-start h-full w-full bg-[#D7A0A6] p-6 flex flex-col gap-6 transform transition-transform duration-300 ease-in-out md:hidden z-50 ${
+                className={`fixed top-30 left-0 justify-start items-start h-full w-full bg-white p-6 flex flex-col gap-6 transform transition-transform duration-300 ease-in-out md:hidden z-50 ${
                     showMenu ? "translate-x-0" : "-translate-x-full"
                 }`}
             >
-                <button onClick={()=>window.location.href='/'} className="text-[#B17342] text-[20px] font-bold">Home</button>
-                <button onClick={()=>window.location.href="/about"} className="text-[#B17342] text-[20px] font-bold">About</button>
-                <button onClick={()=>window.location.href="/contact-us"} className="text-[#B17342] text-[20px] font-bold">Contact Us</button>
+                <button onClick={()=>window.location.href='/'} className="text-black text-[20px] font-bold">Home</button>
+                <button onClick={()=>window.location.href="/about"} className="text-black text-[20px] font-bold">About</button>
+                <button onClick={()=>window.location.href="/contact-us"} className="text-black text-[20px] font-bold">Contact Us</button>
                 <button onClick={()=>window.location.href='/order'} className="text-white w-max bg-black p-2 rounded-md text-[20px] hover:text-[#A17342]">
                     <FontAwesomeIcon icon={faCartShopping} /> Order
                 </button>

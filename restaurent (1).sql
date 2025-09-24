@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 18, 2025 at 04:56 PM
+-- Generation Time: Sep 24, 2025 at 12:39 PM
 -- Server version: 8.0.42
 -- PHP Version: 8.2.28
 
@@ -39,7 +39,8 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`Id`, `Name`) VALUES
 (1, 'Drinks'),
 (2, 'Pizza'),
-(3, 'Burgers');
+(3, 'Burger'),
+(4, 'Snacks');
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,9 @@ INSERT INTO `menuitems` (`Id`, `Name`, `CategoryId`, `Price`, `Status`, `Image`)
 (4, 'Cheese Burger', 3, 199.00, 1, NULL),
 (5, 'Chicken Burger', 3, 229.00, 1, NULL),
 (6, 'Coca Cola', 1, 49.00, 1, NULL),
-(7, 'Orange Juice', 1, 79.00, 1, NULL);
+(7, 'Orange Juice', 1, 7.00, 1, NULL),
+(9, 'j', 2, 9.00, 1, 'b086ebc1-d920-4b66-b766-237788b27a18.png'),
+(10, 'MD. RASHEDUL ISLAM', 1, 1.00, 1, 'af4ee43e-f81b-46f1-9565-27f1bac45934.png');
 
 -- --------------------------------------------------------
 
@@ -147,7 +150,8 @@ INSERT INTO `ordermeta` (`Id`, `OrderId`, `ProductName`, `CategoryName`, `Quanti
 (6, 4, 'Orange Juice', 'Drinks', 1, 79.00, 79.00, NULL),
 (7, 5, 'Coca Cola', 'Drinks', 1, 49.00, 49.00, NULL),
 (8, 5, 'Orange Juice', 'Drinks', 1, 79.00, 79.00, NULL),
-(9, 6, 'Coca Cola', 'Drinks', 1, 49.00, 49.00, NULL);
+(9, 6, 'Coca Cola', 'Drinks', 1, 49.00, 49.00, NULL),
+(10, 8, 'Cheese Burger', 'Burger', 1, 199.00, 199.00, NULL);
 
 -- --------------------------------------------------------
 
@@ -160,6 +164,7 @@ CREATE TABLE `orders` (
   `UserId` int DEFAULT NULL,
   `Total` decimal(6,2) NOT NULL,
   `Status` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `TableNo` int NOT NULL,
   `CreatedAt` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -167,13 +172,15 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`Id`, `UserId`, `Total`, `Status`, `CreatedAt`) VALUES
-(1, 1, 349.00, 'Processing', '2025-09-16 15:04:13.072625'),
-(2, 1, 349.00, 'Processing', '2025-09-16 15:28:31.685496'),
-(3, 1, 128.00, 'Processing', '2025-09-16 15:36:10.330817'),
-(4, 1, 128.00, 'Processing', '2025-09-16 15:38:11.746804'),
-(5, 1, 128.00, 'Processing', '2025-09-16 15:41:08.960296'),
-(6, 1, 49.00, 'Processing', '2025-09-18 20:32:40.072123');
+INSERT INTO `orders` (`Id`, `UserId`, `Total`, `Status`, `TableNo`, `CreatedAt`) VALUES
+(1, 1, 349.00, 'Completed', 0, '2025-09-16 15:04:13.072625'),
+(2, 1, 349.00, 'Cancelled', 0, '2025-09-16 15:28:31.685496'),
+(3, 1, 128.00, 'Processing', 0, '2025-09-16 15:36:10.330817'),
+(4, 1, 128.00, 'Processing', 0, '2025-09-16 15:38:11.746804'),
+(5, 1, 128.00, 'Processing', 0, '2025-09-16 15:41:08.960296'),
+(6, 1, 49.00, 'Processing', 0, '2025-09-18 20:32:40.072123'),
+(7, 0, 0.00, 'string', 0, '2025-09-20 01:20:51.168976'),
+(8, 1, 199.00, 'Processing', 2, '2025-09-24 18:38:48.029119');
 
 -- --------------------------------------------------------
 
@@ -326,13 +333,13 @@ ALTER TABLE `__efmigrationshistory`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `menuitems`
 --
 ALTER TABLE `menuitems`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `optionmeta`
@@ -350,13 +357,13 @@ ALTER TABLE `options`
 -- AUTO_INCREMENT for table `ordermeta`
 --
 ALTER TABLE `ordermeta`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `payments`

@@ -18,6 +18,7 @@ public class OrderController : ControllerBase
             UserId = request.UserId,
             Total = request.Total,
             Status = request.Status,
+            TableNo=request.Table
         };
         _context.Orders.Add(order);
         await _context.SaveChangesAsync(); // This saves the order and populates its ID
