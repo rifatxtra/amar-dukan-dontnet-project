@@ -200,7 +200,7 @@ export default function Order() {
       {/* popup for table no */}
       {showPopUp && (
         <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-md w-[90%] md:w-[50%] max-h-[70vh] overflow-auto flex flex-col gap-4 items-center justify-center">
+          <div className="bg-slate-300 p-6 rounded-md w-[90%] md:w-[50%] max-h-[70vh] overflow-auto flex flex-col gap-4 items-center justify-center">
             <label htmlFor="">Please Enter Table no.</label>
             <input
               className="outline-none border border-black rounded-md p-2"
@@ -305,7 +305,7 @@ export default function Order() {
               {items.map((item, key) => (
                 <div className="item-card border rounded p-3" key={key}>
                   <img
-                    src={baseURL + item.image}
+                    src={baseURL+"/uploads/images/" + item.image}
                     alt={item.name}
                     height={150}
                     className="mb-2 w-full"

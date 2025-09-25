@@ -42,7 +42,17 @@ export default function ManageProduct() {
         categoryId: item.categoryId,
         price: item.price,
         status: item.status,
-        options: item.options || [],
+        options: item.options
+          ? item.options.map((o) => ({
+              optionName: o.optionName,
+              optionType: o.optionType,
+              optionMeta:
+                o.metas?.map((m) => ({
+                  metaKey: m.metaKey,
+                  metaValue: m.metaValue,
+                })) || [],
+            }))
+          : [],
       });
       setFile(null);
     } else {
@@ -106,12 +116,22 @@ export default function ManageProduct() {
 
   const handleSave = async () => {
     const formData = new FormData();
-    formData.append("name", form.name);
-    formData.append("categoryId", form.categoryId.toString());
-    formData.append("price", form.price.toString());
-    formData.append("status", form.status ? "true" : "false"); // send as string
-    if (file) formData.append("image", file);
-    formData.append("options", JSON.stringify(form.options));
+    formData.append("Name", form.name);
+    formData.append("CategoryId", form.categoryId.toString());
+    formData.append("Price", form.price.toString());
+    formData.append("Status", form.status ? "true" : "false");
+    if (file) formData.append("Image", file);
+
+    // ✅ Fix casing for backend
+    const optionsWithCase = form.options.map((opt) => ({
+      OptionName: opt.optionName,
+      OptionType: opt.optionType,
+      OptionMeta: opt.optionMeta.map((m) => ({
+        MetaKey: m.metaKey,
+        MetaValue: m.metaValue,
+      })),
+    }));
+    formData.append("Options", JSON.stringify(optionsWithCase));
 
     try {
       if (editingItem) {
@@ -148,7 +168,7 @@ export default function ManageProduct() {
         + Add Product
       </button>
 
-      {/* Responsive Table */}
+      {/* Table */}
       <div className="w-full overflow-x-auto border rounded">
         <table className="min-w-full border-collapse border">
           <thead>
@@ -185,7 +205,9 @@ export default function ManageProduct() {
                   {categories.find((c) => c.id === p.categoryId)?.name}
                 </td>
                 <td className="p-2 border">${p.price}</td>
-                <td className="p-2 border">{p.status ? "Active" : "Inactive"}</td>
+                <td className="p-2 border">
+                  {p.status ? "Active" : "Inactive"}
+                </td>
                 <td className="p-2 border">
                   <button
                     className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
@@ -205,7 +227,6 @@ export default function ManageProduct() {
           </tbody>
         </table>
       </div>
-
 
       {/* Modal */}
       {showModal && (
